@@ -1,9 +1,9 @@
 {
-  "name": "tear-adactyl",
-  "version": "0.0.0",
-  "description": "tearADactyl",
-  "main": "app.js",
+  "name": "tearadactyl",
+  "version": "0.0.1",
+  "description": "Create a zero-width character cipher to fingerprint dynamic web content.",
+  "main": "tearADactyl.js",
   "author": {
-    "name": "Owner"
+    "name": "Matt Woodruff"
   }
 }
