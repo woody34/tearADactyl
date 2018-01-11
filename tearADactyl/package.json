@@ -1,0 +1,9 @@
+{
+  "name": "tear-adactyl",
+  "version": "0.0.0",
+  "description": "tearADactyl",
+  "main": "app.js",
+  "author": {
+    "name": "Owner"
+  }
+}
