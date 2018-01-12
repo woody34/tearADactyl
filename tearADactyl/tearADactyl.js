@@ -10,7 +10,7 @@ The input is limited to UTF characters within the point range of 0-65535. This i
 * @method cipher
 * @param {String} stringUserID - Text to hide.
 * @return {String} - 'Invisible' cipher.
-*/
+*/ 
 function cipher(stringUserID) {
 
     /*
