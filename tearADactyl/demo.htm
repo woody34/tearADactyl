@@ -1,17 +1,9 @@
-'use strict';
-
-/* 
-*This function takes a string input and returns a 4 character hex cipher(fingerprint) of the input using UTF Zero-Width Characters(ZWC).
-16 different ZWC's are mapped to represent the four hex values of the UTF point.
-The 'finger print' is a 4 character(per input character) hex representation of the UTF point reference for all characters in the input string.
-Ref: https://unicode-table.com/en/
-The input is limited to UTF characters within the point range of 0-65535. This includes every character listed on the Ref site above as of January 9th 2018.
-* @namespace tearADactyl
-* @method cipher
-* @param {String} stringUserID - Text to hide.
-* @return {String} - 'Invisible' cipher.
-*/
-function cipher(stringUserID) {
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tearadactyl demo</title>
+<script>
+function _cipher(stringUserID) {
 
     /*
     Character Map
@@ -89,8 +81,8 @@ function cipher(stringUserID) {
     return stringFingerPrint;
 }
 
-//Reverse cipher.
 function deCipher(stringCipher) {
+
     /*
     Character Map
 
@@ -174,6 +166,69 @@ function deCipher(stringCipher) {
         stringClearText += String.fromCodePoint(parseInt(stringHexCode, 16)); 
     }
 
-    return "Code:" + stringClearText;
+    return stringClearText;
 
 }
+
+function createCipher() {
+
+    var inputText = document.getElementById("demo").value;
+	
+	var cipher;
+
+    cipher = _cipher(inputText);
+
+    document.getElementById("cipher").value = cipher;
+
+    document.getElementById("cipherLength").innerHTML = "Cipher Length: " + cipher.length;
+
+}
+
+function executeDecipher(){
+
+	var inputCipher = document.getElementById("cipher").value;
+
+	var decipheredText = deCipher(inputCipher);
+
+	document.getElementById("deCipherText").value = decipheredText;
+
+}
+
+</script>
+</head>
+<body>
+
+<h2>Tearadactyl demo</h2>
+
+<p>Input text you would like to use to create your invisible fingerprint</p>
+
+<input id="demo">Text To Encrypt.</input>
+
+<br>
+
+<button onclick="createCipher()">Create Cipher</button>
+
+<br>
+
+<input id="cipher">Invisible cipher.</input>
+
+<br>
+
+<p id="cipherLength">Cipher.Length:0</p>
+
+<button onclick="executeDecipher()">Decode cipher</button>
+
+<br>
+
+<input id="deCipherText">Deciphered from invisible characters inside above input.</input>
+
+
+
+
+
+
+
+</body>
+</html>
+
+
