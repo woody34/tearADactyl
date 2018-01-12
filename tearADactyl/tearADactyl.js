@@ -6,12 +6,13 @@
 The 'finger print' is a 4 character(per input character) hex representation of the UTF point reference for all characters in the input string.
 Ref: https://unicode-table.com/en/
 The input is limited to UTF characters within the point range of 0-65535. This includes every character listed on the Ref site above as of January 9th 2018.
+????????????????????????????????????????????????????????????????????????????????????????
 * @namespace tearADactyl
-* @method cipher
+* @method _cipher
 * @param {String} stringUserID - Text to hide.
 * @return {String} - 'Invisible' cipher.
 */ 
-function cipher(stringUserID) {
+function _cipher(stringUserID) {
 
     /*
     Character Map
@@ -69,8 +70,6 @@ function cipher(stringUserID) {
 
         var hexChar = ("000" + decChar.toString(16)).slice(-4).toString(16);//grabs a 4 digit Hexadecimal value for each character's UTF point.
 
-        //console.log('Int: ' + decChar + ' Hex: ' + hexChar)
-
         for (var j = 0; j < hexChar.length; j++) {//iterates through all of the 4 Hexadecimal values that represent 1 chatacters UTF point.
 
             for (var arrayIndex in arrayMapHexUnicode) {//iterate through all 16 mapped hex values and adds new value to fingerprint
@@ -78,8 +77,6 @@ function cipher(stringUserID) {
                 if (hexChar.charAt(j) == arrayMapHexUnicode[arrayIndex][0].toString(16)) {
 
                     stringFingerPrint += String.fromCodePoint(arrayMapHexUnicode[arrayIndex][1]);//creates fingerprint.
-                    //console.log(' Hex:' + arrayMapHexUnicode[arrayIndex][1].toString(16) + 'Char: ' +
-                    //    ''.charCodeAt((parseInt(arrayMapHexUnicode[arrayIndex][1]).toString())) + 'FP: ' + stringFingerPrint);
                 }
             }
         }
@@ -89,8 +86,14 @@ function cipher(stringUserID) {
     return stringFingerPrint;
 }
 
-//Reverse cipher.
-function deCipher(stringCipher) {
+
+/*This function takes a tearADactyl cipher and decodes it into its original text.
+* @namespace tearADactyl
+* @method _deCipher
+* @param { String } stringCipher - 'Invisible' cipher.
+* @return { String } - Original text.
+*/ 
+function _deCipher(stringCipher) {
     /*
     Character Map
 
@@ -153,13 +156,9 @@ function deCipher(stringCipher) {
 
         for (var arrayIndex in arrayMapHexUnicode) { //Decode.
 
-            //console.log(stringCipher.charCodeAt(i).toString(16) + '?=' + arrayMapHexUnicode[arrayIndex][1]);
-
             if (stringCipher.charCodeAt(i) == arrayMapHexUnicode[arrayIndex][1]) {
 
                 intHexPointValues.push(arrayMapHexUnicode[arrayIndex][0]);
-
-                //console.log(intHexPointValues[i].toString(16))
 
             }
         }
@@ -169,11 +168,9 @@ function deCipher(stringCipher) {
 
         var stringHexCode = '' + intHexPointValues[j].toString(16) + intHexPointValues[j + 1].toString(16) + intHexPointValues[j + 2].toString(16) + intHexPointValues[j + 3].toString(16);
 
-        //console.log(parseInt(stringHexCode))
-
         stringClearText += String.fromCodePoint(parseInt(stringHexCode, 16)); 
     }
 
-    return "Code:" + stringClearText;
+    return stringClearText;
 
 }
